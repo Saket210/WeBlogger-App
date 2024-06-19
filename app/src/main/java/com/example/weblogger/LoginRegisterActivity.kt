@@ -126,11 +126,12 @@ class LoginRegisterActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data!= null && data.data!=null)
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data!= null && data.data!=null) {
             profileUri = data.data
             Glide.with(this)
                 .load(profileUri)
                 .apply(RequestOptions.circleCropTransform())
                 .into(binding.registerImage)
+        }
     }
 }
