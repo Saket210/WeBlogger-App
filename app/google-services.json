@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "690671763326",
+    "project_id": "weblogger-9e863",
+    "storage_bucket": "weblogger-9e863.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690671763326:android:07e7b16fbd6fc74e74bd2f",
+        "android_client_info": {
+          "package_name": "com.example.weblogger"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAadaDLlDFlSZ_9wMpRdUdT06FEvcLG0JY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

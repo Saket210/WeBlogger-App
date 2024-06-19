@@ -3,6 +3,10 @@
     <style name="Base.Theme.WeBlogger" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">#A32CC4</item>
+    </style>
+    <style name="round" parent="">
+        <item name="cornerSize">50%</item>
     </style>
 
     <style name="Theme.WeBlogger" parent="Base.Theme.WeBlogger" />
