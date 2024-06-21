@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="240dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="25dp"
     android:background="@color/white"
     android:elevation="3dp"
@@ -89,14 +89,14 @@
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginTop="10dp"
-            android:maxLines="4"
-            android:textSize="16sp"
             android:fontFamily="sans-serif-thin"
-            android:textColor="@color/black"
-            android:textStyle="bold"
             android:letterSpacing="0.03"
             android:lineHeight="22sp"
+            android:maxLines="4"
             android:text="Blog text - hfhnsekjfshu sdhn ndnvd ndnvd nvdkjdhnd kndljndjnjbdkjs  vkjsknjdnvjlnlonsolv"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/divider"
             app:layout_constraintStart_toStartOf="@+id/divider"
             app:layout_constraintTop_toBottomOf="@+id/divider" />
@@ -109,44 +109,34 @@
             android:layout_marginBottom="5dp"
             android:text="Read more"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/blog_content"
+            app:layout_constraintEnd_toStartOf="@+id/edit_btn"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/blog_content" />
 
-        <ImageButton
-            android:id="@+id/button_save"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/red_save"
-            android:background="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/blog_content"
-            app:layout_constraintTop_toBottomOf="@+id/blog_content" />
+        <Button
+            android:id="@+id/edit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#070303"
+            android:text="Edit"
+            app:layout_constraintBottom_toBottomOf="@+id/readmore"
+            app:layout_constraintEnd_toStartOf="@+id/delete_btn"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/readmore"
+            app:layout_constraintTop_toTopOf="@+id/readmore" />
 
-        <ImageButton
-            android:id="@+id/button_like"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="15dp"
-            android:src="@drawable/black_like"
-            android:background="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button_save"
-            app:layout_constraintTop_toBottomOf="@+id/blog_content" />
-
-        <TextView
-            android:id="@+id/like_count"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="3dp"
-            android:text="10"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button_like"
-            app:layout_constraintTop_toBottomOf="@+id/blog_content" />
-
+        <Button
+            android:id="@+id/delete_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#DB0303"
+            android:text="Delete"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/edit_btn"
+            app:layout_constraintTop_toTopOf="@+id/edit_btn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

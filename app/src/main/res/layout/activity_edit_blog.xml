@@ -6,7 +6,7 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddBlogActivity">
+    tools:context=".EditBlogActivity">
 
     <ImageButton
         android:id="@+id/back_btn"
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:text="Add New Blog"
+        android:text="Edit Blog"
         android:textColor="@color/black"
         android:fontFamily="@font/aclonica"
         android:textSize="25sp"
@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="Post Blog"
+        android:text="Save"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:fontFamily="@font/aclonica"
@@ -117,4 +117,5 @@
             android:textColor="@color/black"
             android:hint="Enter Blog Description" />
     </com.google.android.material.textfield.TextInputLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

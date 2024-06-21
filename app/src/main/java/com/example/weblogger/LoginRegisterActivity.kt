@@ -100,7 +100,12 @@ class LoginRegisterActivity : AppCompatActivity() {
                                     userReference.child(userId).setValue(userData)
 
                                     val storageReference = storage.reference.child("ProfilePic/$userId.jpg")
-                                    storageReference.putFile(profileUri!!)
+                                    storageReference.putFile(profileUri!!).addOnCompleteListener{task ->
+                                        storageReference.downloadUrl.addOnCompleteListener { profileUri->
+                                            val profileUrl = profileUri.result.toString()
+                                            userReference.child(userId).child("profileUrl").setValue(profileUrl)
+                                        }
+                                    }
                                     finish()
                                 }
                             } else {
