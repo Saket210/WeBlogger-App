@@ -34,7 +34,9 @@ class ProfileActivity : AppCompatActivity() {
 
         binding.btnLogout.setOnClickListener{
             auth.signOut()
-            startActivity(Intent(this,WelcomeActivity::class.java))
+            val intent = Intent(this,WelcomeActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent)
             finish()
         }
 

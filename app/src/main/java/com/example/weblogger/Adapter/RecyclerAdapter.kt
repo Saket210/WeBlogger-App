@@ -17,7 +17,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class RecyclerAdapter(private val items: MutableList<RecyclerItemModel>) :
+class RecyclerAdapter(private var items: MutableList<RecyclerItemModel>) :
     RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>() {
 
     private val databaseReference: DatabaseReference = FirebaseDatabase.getInstance("https://weblogger-9e863-default-rtdb.asia-southeast1.firebasedatabase.app").reference
@@ -37,6 +37,12 @@ class RecyclerAdapter(private val items: MutableList<RecyclerItemModel>) :
             binding.likeCount.text = recyclerItemModel.likeCount.toString()
 
             binding.root.setOnClickListener {
+                val context = binding.root.context
+                val intent = Intent(context, ReadBlogActivity::class.java)
+                intent.putExtra("Item", recyclerItemModel)
+                context.startActivity(intent)
+            }
+            binding.readmore.setOnClickListener {
                 val context = binding.root.context
                 val intent = Intent(context, ReadBlogActivity::class.java)
                 intent.putExtra("Item", recyclerItemModel)
@@ -64,9 +70,7 @@ class RecyclerAdapter(private val items: MutableList<RecyclerItemModel>) :
                     likeButtonClick(blogPostId, recyclerItemModel, binding)
                 }
             }
-
-            val userReference = databaseReference.child("Users").child(user?.uid ?: "")
-            val savedReference = databaseReference.child("Users").child("SavedPosts").child(blogPostId)
+            val savedReference = databaseReference.child("Users").child(user!!.uid).child("SavedPosts").child(blogPostId)
             savedReference.addListenerForSingleValueEvent(object :ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.exists()){
@@ -83,7 +87,7 @@ class RecyclerAdapter(private val items: MutableList<RecyclerItemModel>) :
 
             binding.buttonSave.setOnClickListener {
                 if(user!=null) {
-                    saveButttonClick(blogPostId, recyclerItemModel, binding)
+                    saveButtonClick(blogPostId, recyclerItemModel, binding)
                 }
             }
         }
@@ -148,7 +152,8 @@ class RecyclerAdapter(private val items: MutableList<RecyclerItemModel>) :
         }
     }
 
-    private fun saveButttonClick(blogPostId: String, recyclerItemModel: RecyclerItemModel, binding: RecyclerItemBinding) {
+
+    private fun saveButtonClick(blogPostId: String, recyclerItemModel: RecyclerItemModel, binding: RecyclerItemBinding) {
         val userReference = databaseReference.child("Users").child(user!!.uid)
         userReference.child("SavedPosts").child(blogPostId).addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -156,7 +161,6 @@ class RecyclerAdapter(private val items: MutableList<RecyclerItemModel>) :
                     userReference.child("SavedPosts").child(blogPostId).removeValue()
                         .addOnSuccessListener {
                             updateSavedButton(binding,false)
-
                             val clickedItem = items.find { it.blogPostId == blogPostId }
                             clickedItem?.isSaved = false
                             notifyDataSetChanged()
@@ -165,7 +169,6 @@ class RecyclerAdapter(private val items: MutableList<RecyclerItemModel>) :
                     userReference.child("SavedPosts").child(blogPostId).setValue(true)
                         .addOnSuccessListener {
                             updateSavedButton(binding,true)
-
                             val clickedItem = items.find { it.blogPostId == blogPostId }
                             clickedItem?.isSaved = true
                             notifyDataSetChanged()
@@ -205,6 +208,11 @@ class RecyclerAdapter(private val items: MutableList<RecyclerItemModel>) :
     fun update(savedBlogs: List<RecyclerItemModel>) {
         items.clear()
         items.addAll(savedBlogs)
+        notifyDataSetChanged()
+    }
+
+    fun showFilteredList(newBlogList: MutableList<RecyclerItemModel>) {
+        this.items = newBlogList
         notifyDataSetChanged()
     }
 }

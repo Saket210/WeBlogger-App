@@ -52,8 +52,6 @@ class AddBlogActivity : AppCompatActivity() {
             val user:FirebaseUser? = auth.currentUser
             if(user!=null){
                 val userId = user.uid
-//                val userName= user.displayName?:"Anonymous"
-//                val profileUrl = user.photoUrl?:""
 
                 userReference.child(userId).addListenerForSingleValueEvent(object :ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {

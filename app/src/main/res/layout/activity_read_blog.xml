@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="@color/white"
+    android:background="@drawable/bg_app"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ReadBlogActivity">
@@ -14,6 +14,7 @@
         android:layout_height="24dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        app:tint="@color/white"
         android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -27,7 +28,7 @@
         android:layout_marginEnd="20dp"
         android:text="Blog Title"
         android:textSize="20sp"
-        android:textColor="@color/purple"
+        android:textColor="@color/white"
         android:fontFamily="@font/aclonica"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/back_btn1"
@@ -38,7 +39,8 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginTop="20dp"
-        app:cardCornerRadius="30dp"
+        app:cardCornerRadius="50dp"
+        android:backgroundTint="@color/white"
         app:layout_constraintStart_toStartOf="@+id/txt_title"
         app:layout_constraintTop_toBottomOf="@+id/txt_title">
 
@@ -54,11 +56,11 @@
         android:layout_width="80dp"
         android:layout_height="35dp"
         android:layout_marginStart="10dp"
-        android:fontFamily="sans-serif-light"
+        android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:text="Blogger Name"
-        android:textColor="@color/black"
-        android:textSize="13sp"
+        android:textColor="@color/white"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/cardView3"
         app:layout_constraintStart_toEndOf="@+id/cardView3"
         app:layout_constraintTop_toTopOf="@+id/cardView3" />
@@ -70,7 +72,7 @@
         android:layout_marginEnd="20dp"
         android:fontFamily="sans-serif-medium"
         android:text="Jun 19,2022"
-        android:textColor="@color/hint_color"
+        android:textColor="@color/white"
         android:textSize="13sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="@+id/txt_name"
@@ -83,6 +85,7 @@
         android:layout_height="1dp"
         android:layout_marginTop="15dp"
         android:background="?android:attr/listDivider"
+        android:outlineAmbientShadowColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/date"
         app:layout_constraintStart_toStartOf="@+id/cardView3"
         app:layout_constraintTop_toBottomOf="@+id/txt_name" />
@@ -107,38 +110,13 @@
             android:text="Blog Description"
             android:textColor="@color/black"
             android:textSize="17sp"
+            android:background="@drawable/edittext_shape"
+            android:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/divider"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="@+id/divider"
             app:layout_constraintTop_toBottomOf="@+id/divider" />
     </ScrollView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/like_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        app:srcCompat="@drawable/black_like"
-        android:clickable="true"
-        app:shapeAppearanceOverlay="@style/round"
-        app:backgroundTint="#724BB6"
-        app:layout_constraintBottom_toTopOf="@+id/save_btn"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/save_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="40dp"
-        app:srcCompat="@drawable/black_save"
-        android:clickable="true"
-        app:shapeAppearanceOverlay="@style/round"
-        app:backgroundTint="#724BB6"
-        app:tint="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

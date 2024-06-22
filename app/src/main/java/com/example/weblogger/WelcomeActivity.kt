@@ -50,4 +50,16 @@ class WelcomeActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    override fun onBackPressed() {
+
+        if(auth.currentUser == null){
+            val intent = Intent(Intent.ACTION_MAIN)
+            intent.addCategory(Intent.CATEGORY_HOME)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        } else {
+            super.onBackPressed()
+        }
+    }
 }

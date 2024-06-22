@@ -76,7 +76,7 @@ class MyBlogsActivity : AppCompatActivity() {
                 val blogSavedList = ArrayList<RecyclerItemModel>()
                 for(blogsnapshot in snapshot.children){
                     val blogSaved = blogsnapshot.getValue(RecyclerItemModel::class.java)
-                    if(blogSaved!=null || userId == blogSaved?.userId) {
+                    if(blogSaved!=null && userId == blogSaved?.userId) {
                         blogSavedList.add(blogSaved!!)
                     }
                 }

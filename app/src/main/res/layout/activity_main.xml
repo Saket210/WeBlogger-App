@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFF7"
+    android:background="@drawable/bg_app"
     android:textAlignment="center"
     tools:context=".MainActivity">
 
@@ -18,7 +18,7 @@
         android:layout_marginTop="28dp"
         android:fontFamily="@font/aclonica"
         android:text="Blogs"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +30,9 @@
         android:layout_height="43dp"
         android:layout_marginTop="23dp"
         android:layout_marginEnd="25dp"
-        app:cardCornerRadius="30dp"
+        app:cardCornerRadius="200dp"
+        app:cardElevation="0dp"
+        android:backgroundTint="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -39,27 +41,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/icon_profile" />
+            android:src="@drawable/icon_profile"/>
     </androidx.cardview.widget.CardView>
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="26dp"
-        android:background="@drawable/save_icon"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:src="@drawable/red_save"
+        app:tint="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/cardView2"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <SearchView
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/search_blog"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/search_shape"
         android:iconifiedByDefault="false"
-        android:queryHint="Search Blog"
+        app:queryHint="Search blogs..."
         app:layout_constraintEnd_toEndOf="@+id/cardView2"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/cardView2" />
@@ -71,8 +77,10 @@
         android:layout_marginTop="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/search_blog"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/search_blog"
         app:layout_constraintTop_toBottomOf="@+id/search_blog"
+        app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/recycler_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

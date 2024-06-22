@@ -2,8 +2,10 @@ package com.example.weblogger
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +19,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     private val binding:ActivityMainBinding by lazy {
@@ -45,12 +48,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         auth = FirebaseAuth.getInstance()
-        databaseReference = FirebaseDatabase.getInstance("https://weblogger-9e863-default-rtdb.asia-southeast1.firebasedatabase.app").reference.child("Blogs")
+        databaseReference = FirebaseDatabase.getInstance("https://weblogger-9e863-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Blogs")
 
         val userId = auth.currentUser?.uid
+        Log.d("main","outside finish main activity ${auth.currentUser}")
 
         if(userId!=null){
             loadProfileImage(userId)
+        } else {
+            Log.d("main","finish main activity")
+            finish()
         }
 
         val recyclerView = binding.recyclerView
@@ -59,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         databaseReference.addValueEventListener(object :ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
+            override fun onDataChange(snapshot: DataSnapshot){
                 blogs.clear()
                 for (snapshot in snapshot.children){
                     val item = snapshot.getValue(RecyclerItemModel::class.java)
@@ -68,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 blogs.reverse()
-                adapter.notifyDataSetChanged()
+                adapter.showFilteredList(blogs)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -76,6 +83,25 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+        binding.searchBlog.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val newBlogList = mutableListOf<RecyclerItemModel>()
+                for (blogs in blogs) {
+                    if (blogs.title?.lowercase(Locale.ROOT)!!.contains(newText!!)) {
+                        newBlogList.add(blogs)
+                    }
+                }
+                adapter.showFilteredList(newBlogList)
+                return true
+            }
+        })
+
+
 
 
         binding.addItemButton.setOnClickListener {
@@ -93,6 +119,8 @@ class MainActivity : AppCompatActivity() {
                     Glide.with(this@MainActivity)
                         .load(profileUrl)
                         .into(binding.profileImg)
+                } else {
+                    binding.profileImg.setImageResource(R.drawable.icon_profile)
                 }
             }
 
@@ -101,5 +129,15 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(auth.currentUser == null) {
+            val intent = Intent(this,WelcomeActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent)
+            finish()
+        }
     }
 }
